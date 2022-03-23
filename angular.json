@@ -80,9 +80,18 @@
           "options": {
             "browserTarget": "todo-training:build"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
         }
       }
     }
   },
-  "defaultProject": "todo-training"
+  "defaultProject": "todo-training",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
