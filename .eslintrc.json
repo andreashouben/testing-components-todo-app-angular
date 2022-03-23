@@ -3,6 +3,7 @@
   "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
+      "plugins": ["testing-library"],
       "files": ["*.ts"],
       "parserOptions": {
         "project": ["tsconfig.json"],
