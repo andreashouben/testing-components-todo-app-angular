@@ -35,6 +35,6 @@ describe('AppComponent', () => {
     const input = screen.getByLabelText(/add todo/i);
     userEvent.type(input, 'Buy milk{enter}');
 
-    expect(screen.queryByText(/no todos/i)).toBeInTheDocument();
+    expect(screen.queryByText(/no todos/i)).not.toBeInTheDocument();
   });
 });
