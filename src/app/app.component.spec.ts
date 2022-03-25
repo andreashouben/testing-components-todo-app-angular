@@ -2,12 +2,14 @@ import { AppComponent } from './app.component';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgIconsModule } from '@ng-icons/core';
+import { TypTrash } from '@ng-icons/typicons';
 
 describe('AppComponent', () => {
   let app: AppComponent;
   beforeEach(async () => {
     const { fixture } = await render(AppComponent, {
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, NgIconsModule.withIcons({ TypTrash })],
     });
     app = fixture.componentInstance;
   });
@@ -36,5 +38,22 @@ describe('AppComponent', () => {
     userEvent.type(input, 'Buy milk{enter}');
 
     expect(screen.queryByText(/no todos/i)).not.toBeInTheDocument();
+  });
+
+  it('should remove the todo item after clicking the remove icon', async () => {
+    const input = screen.getByLabelText(/add todo/i);
+    userEvent.type(input, 'Buy milk{enter}');
+
+    const removeButton = screen.getByRole('button', { name: /remove/i });
+    userEvent.click(removeButton);
+
+    expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
+  });
+
+  it('should show an error if the todo is empty', async () => {
+    const input = screen.getByLabelText(/add todo/i);
+    userEvent.type(input, '{enter}');
+
+    expect(screen.getByText(/todo is required/i)).toBeVisible();
   });
 });
