@@ -1,10 +1,19 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-root',
+  selector: 'todo-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'todo-training';
+  todoForm = this.formBuilder.group({
+    todo: '',
+  });
+
+  constructor(private formBuilder: FormBuilder) {}
+
+  onSubmit(form: HTMLFormElement) {
+    console.log(form);
+  }
 }

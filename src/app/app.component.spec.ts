@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { render, waitForElementToBeRemoved } from '@testing-library/angular';
+import { render, screen } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event';
 
 describe('AppComponent', () => {
   let app: AppComponent;
@@ -13,16 +13,18 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'todo-training'`, () => {
-    expect(app.title).toEqual('todo-training');
+  it('should have a tilte "Your Todos for today"', () => {
+    expect(screen.getByText(/your todos for today/i)).toBeVisible();
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'todo-training app is running!'
-    );
+  it('should show an empty todo list', async () => {
+    expect(screen.getByText(/no todos/i)).toBeVisible();
+  });
+
+  it('should show a todo item after submitting a new todo', async () => {
+    const input = screen.getByLabelText(/add todo/i);
+    userEvent.type(input, 'Buy milk{enter}');
+
+    expect(screen.getByRole('listitem')).toHaveValue('Buy milk');
   });
 });
