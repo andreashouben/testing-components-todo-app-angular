@@ -1,11 +1,14 @@
 import { AppComponent } from './app.component';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('AppComponent', () => {
   let app: AppComponent;
   beforeEach(async () => {
-    const { fixture } = await render(AppComponent);
+    const { fixture } = await render(AppComponent, {
+      imports: [ReactiveFormsModule],
+    });
     app = fixture.componentInstance;
   });
 
@@ -25,6 +28,13 @@ describe('AppComponent', () => {
     const input = screen.getByLabelText(/add todo/i);
     userEvent.type(input, 'Buy milk{enter}');
 
-    expect(screen.getByRole('listitem')).toHaveValue('Buy milk');
+    expect(await screen.findByRole('listitem')).toHaveTextContent('Buy milk');
+  });
+
+  it('should hide the "no todos" text after adding a todo', () => {
+    const input = screen.getByLabelText(/add todo/i);
+    userEvent.type(input, 'Buy milk{enter}');
+
+    expect(screen.queryByText(/no todos/i)).toBeInTheDocument();
   });
 });

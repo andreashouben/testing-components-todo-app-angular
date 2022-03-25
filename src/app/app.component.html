@@ -1,10 +1,15 @@
 <h1>Your Todos for today</h1>
-<p>No Todos</p>
+<p *ngIf="todos.length === 0">No Todos</p>
+<ul>
+  <li *ngFor="let todo of todos">{{ todo.text }}</li>
+</ul>
+
 <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
   <label
     >Add Todo<input
       type="text"
       name="todo"
+      formControlName="todo"
       placeholder="What needs to be done?"
   /></label>
   <button type="submit">Add</button>

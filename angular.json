@@ -92,6 +92,7 @@
   },
   "defaultProject": "todo-training",
   "cli": {
+    "analytics": false,
     "defaultCollection": "@angular-eslint/schematics"
   }
 }
