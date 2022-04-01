@@ -28,4 +28,8 @@ export class TodoService {
   deleteTodo(id: number) {
     this.httpClient.delete(`${this._url}/${id}`);
   }
+
+  createTodo(text: string) {
+    this.httpClient.post<Pick<Todo, 'text'>>('/todos', { text });
+  }
 }

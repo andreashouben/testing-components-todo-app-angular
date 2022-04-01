@@ -82,6 +82,15 @@ describe('TodoServiceJest', () => {
 
     expect(httpMock.delete).toHaveBeenCalledWith('/todos/1');
   });
+
+  it('should post a todo if the create method is called', () => {
+    const { httpMock, todoService } = setup();
+
+    const text = 'Learn angular testing';
+    todoService.createTodo(text);
+
+    expect(httpMock.post).toHaveBeenCalledWith('/todos', { text });
+  });
 });
 
 describe('TodoServiceTestbed', () => {
