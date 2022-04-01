@@ -10,7 +10,7 @@ export class TodoService {
   private readonly _url = '/todos';
 
   getTodos() {
-    return this.httpClient.get(this._url);
+    return this.httpClient.get<Todo[]>(this._url);
   }
 
   markTodoAsDone(id: number) {
@@ -30,6 +30,6 @@ export class TodoService {
   }
 
   createTodo(text: string) {
-    this.httpClient.post<Pick<Todo, 'text'>>('/todos', { text });
+    return this.httpClient.post<Pick<Todo, 'text'>>('/todos', { text });
   }
 }

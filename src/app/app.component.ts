@@ -1,36 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { TodoService } from './todo.service';
 
 @Component({
   selector: 'todo-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   todos: Todo[] = [];
 
   todoForm = this.formBuilder.group({
     todo: ['', Validators.required],
   });
+
   get todo() {
     return this.todoForm.get('todo');
   }
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private todoService: TodoService
+  ) {}
 
   onSubmit() {
     this.todoForm.markAllAsTouched();
     if (this.todoForm.valid) {
-      this.todos.push({
-        id: this.todos.length + 1,
-        text: this.todoForm.value.todo,
-        done: false,
-      });
+      this.todoService
+        .createTodo(this.todoForm.value.todo)
+        .subscribe(() => this.getTodos());
       this.todoForm.reset();
     }
   }
 
   deleteTodo(todo: Todo) {
     this.todos = this.todos.filter((t) => t.id !== todo.id);
+  }
+
+  getTodos() {
+    this.todoService.getTodos().subscribe({
+      next: (value) => (this.todos = value),
+    });
+  }
+
+  ngOnInit(): void {
+    this.getTodos();
   }
 }
