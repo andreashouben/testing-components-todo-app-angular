@@ -1,7 +1,7 @@
 import { TodoService } from './todo.service';
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { from } from 'rxjs';
 import MockedObject = jest.MockedObject;
 
 jest.mock('@angular/common/http');
@@ -47,7 +47,7 @@ describe('TodoServiceJest', () => {
       },
     ];
 
-    httpMock.get.mockReturnValue(of(expectedTodos));
+    httpMock.get.mockReturnValue(from(expectedTodos));
 
     await todoService.getTodos().subscribe({
       next: (todos) => expect(todos).toEqual(expectedTodos),
@@ -103,7 +103,7 @@ describe('TodoServiceTestbed', () => {
   });
 
   it('should return the todos delivered by the backend', async () => {
-    httpMock.get.mockReturnValue(of(expectedTodos));
+    httpMock.get.mockReturnValue(from(expectedTodos));
 
     await todoService.getTodos().subscribe({
       next: (todos) => expect(todos).toEqual(expectedTodos),
@@ -114,7 +114,7 @@ describe('TodoServiceTestbed', () => {
   it('should call the markDone endpoint', () => {
     todoService.markTodoAsDone(1);
 
-    expect(httpMock.patch).toHaveBeenCalledWith('/markTodoAsDone/1', {
+    expect(httpMock.patch).toHaveBeenCalledWith('/todos/1', {
       done: true,
     });
   });
