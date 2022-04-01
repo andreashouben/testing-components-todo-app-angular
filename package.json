@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "jest --no-cache --ci --coverage",
-    "test:watch": "jest --no-cache --watch",
+    "test": "jest --ci --coverage",
+    "test:watch": "jest --watch",
     "prettier": "prettier --write .",
     "prepare": "husky install",
     "lint": "ng lint"
