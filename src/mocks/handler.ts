@@ -3,6 +3,11 @@ import { rest } from 'msw';
 let todos: Todo[] = [];
 let id = 0;
 
+export const clearTodos = () => {
+  todos = [];
+  id = 0;
+};
+
 export const handler = [
   rest.get('/todos', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(todos));

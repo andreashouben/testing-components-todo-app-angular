@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { TodoService } from './todo.service';
 
 @Component({
@@ -10,8 +15,8 @@ import { TodoService } from './todo.service';
 export class AppComponent implements OnInit {
   todos: Todo[] = [];
 
-  todoForm = this.formBuilder.group({
-    todo: ['', Validators.required],
+  todoForm = new FormGroup({
+    todo: new FormControl('', [Validators.required]),
   });
 
   get todo() {
@@ -24,7 +29,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   onSubmit() {
-    this.todoForm.markAllAsTouched();
+    this.todoForm.markAsDirty();
     if (this.todoForm.valid) {
       this.todoService
         .createTodo(this.todoForm.value.todo)

@@ -1,15 +1,24 @@
 import { AppComponent } from './app.component';
-import { render, screen } from '@testing-library/angular';
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgIconsModule } from '@ng-icons/core';
 import { TypTrash } from '@ng-icons/typicons';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('AppComponent', () => {
   let app: AppComponent;
   beforeEach(async () => {
     const { fixture } = await render(AppComponent, {
-      imports: [ReactiveFormsModule, NgIconsModule.withIcons({ TypTrash })],
+      imports: [
+        HttpClientModule,
+        ReactiveFormsModule,
+        NgIconsModule.withIcons({ TypTrash }),
+      ],
     });
     app = fixture.componentInstance;
   });
@@ -30,24 +39,21 @@ describe('AppComponent', () => {
     const input = screen.getByLabelText(/add todo/i);
     userEvent.type(input, 'Buy milk{enter}');
 
+    await waitForElementToBeRemoved(screen.queryByText(/no todos/i));
+
     expect(await screen.findByRole('listitem')).toHaveTextContent('Buy milk');
-  });
-
-  it('should hide the "no todos" text after adding a todo', () => {
-    const input = screen.getByLabelText(/add todo/i);
-    userEvent.type(input, 'Buy milk{enter}');
-
-    expect(screen.queryByText(/no todos/i)).not.toBeInTheDocument();
   });
 
   it('should remove the todo item after clicking the remove icon', async () => {
     const input = screen.getByLabelText(/add todo/i);
     userEvent.type(input, 'Buy milk{enter}');
 
+    await waitForElementToBeRemoved(screen.queryByText(/no todos/i));
+
     const removeButton = screen.getByRole('button', { name: /remove/i });
     userEvent.click(removeButton);
 
-    expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
+    await waitForElementToBeRemoved(screen.queryByRole('listitem'));
   });
 
   it('should show an error if the todo is empty', async () => {
