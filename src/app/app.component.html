@@ -1,31 +1,38 @@
-<h1 xmlns="http://www.w3.org/1999/html">Your Todos for today</h1>
-<p *ngIf="todos.length === 0">No Todos</p>
-<ul>
-  <li *ngFor="let todo of todos">
-    {{ todo.text }}
-    <button title="remove" (click)="deleteTodo(todo)">
-      <span hidden>remove</span> <ng-icon name="typ-trash"></ng-icon>
-    </button>
-  </li>
-</ul>
+<div class="container">
+  <h1 xmlns="http://www.w3.org/1999/html">Your Todos for today</h1>
+  <p *ngIf="todos.length === 0">No Todos</p>
+  <ul>
+    <li *ngFor="let todo of todos">
+      {{ todo.text }}
+      <button
+        class="float-right button-icon"
+        title="remove"
+        (click)="deleteTodo(todo)"
+      >
+        <span hidden>remove</span>
+        <ng-icon size="20" name="typ-trash"></ng-icon>
+      </button>
+    </li>
+  </ul>
 
-<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
-  <div class="row">
-    <label for="add-todo">Add Todo</label>
-    <br />
-    <input
-      id="add-todo"
-      type="text"
-      name="todo"
-      formControlName="todo"
-      placeholder="What needs to be done?"
-      autofocus
-    />
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    <fieldset>
+      <label for="add-todo">Add Todo</label>
+      <br />
+      <input
+        id="add-todo"
+        type="text"
+        name="todo"
+        formControlName="todo"
+        placeholder="What needs to be done?"
+        autofocus
+      />
 
-    <div *ngIf="todo?.touched && todo?.errors?.['required']">
-      Todo is required
-    </div>
+      <div *ngIf="todo?.touched && todo?.errors?.['required']">
+        Todo is required
+      </div>
 
-    <button type="submit">Add</button>
-  </div>
-</form>
+      <button type="submit">Add</button>
+    </fieldset>
+  </form>
+</div>

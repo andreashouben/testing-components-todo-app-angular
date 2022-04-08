@@ -25,6 +25,7 @@
     "@ng-icons/core": "^15.0.0",
     "@ng-icons/typicons": "^15.0.0",
     "@types/testing-library__jest-dom": "^5.14.3",
+    "milligram": "^1.4.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

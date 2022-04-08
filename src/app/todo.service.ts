@@ -26,7 +26,7 @@ export class TodoService {
   }
 
   deleteTodo(id: number) {
-    this.httpClient.delete(`${this._url}/${id}`);
+    return this.httpClient.delete(`${this._url}/${id}`);
   }
 
   createTodo(text: string) {

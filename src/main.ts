@@ -9,8 +9,8 @@ if (environment.production) {
   enableProdMode();
 }
 
-worker.start({ onUnhandledRequest: 'bypass' });
-
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+worker.start({ onUnhandledRequest: 'bypass' }).then(() =>
+  platformBrowserDynamic()
+    .bootstrapModule(AppModule)
+    .catch((err) => console.error(err))
+);
