@@ -23,10 +23,6 @@ describe('AppComponent', () => {
     app = fixture.componentInstance;
   });
 
-  it('should create the app', () => {
-    expect(app).toBeTruthy();
-  });
-
   it('should have a tilte "Your Todos for today"', () => {
     expect(screen.getByText(/your todos for today/i)).toBeVisible();
   });
