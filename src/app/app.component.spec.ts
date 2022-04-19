@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoItemComponent } from './todo-list/todo-item/todo-item.component';
+import { TodoFormComponent } from './todo-form/todo-form.component';
 
 describe('AppComponent', () => {
   let app: AppComponent;
@@ -22,7 +23,7 @@ describe('AppComponent', () => {
         ReactiveFormsModule,
         NgIconsModule.withIcons({ TypTrash }),
       ],
-      declarations: [TodoItemComponent, TodoListComponent],
+      declarations: [TodoItemComponent, TodoListComponent, TodoFormComponent],
     });
     app = fixture.componentInstance;
   });

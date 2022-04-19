@@ -3,26 +3,5 @@
   <p *ngIf="todos.length === 0">No Todos</p>
   <todo-todo-list [todos]="todos" (deleteTodoEvent)="deleteTodo($event)"></todo-todo-list>
 
-  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
-    <fieldset>
-      <label for="add-todo"
-        >Add Todo
-        <span
-          class="error"
-          *ngIf="todoForm?.dirty && todo?.errors?.['required']"
-          >(Todo is required)</span
-        ></label
-      >
-      <input
-        id="add-todo"
-        type="text"
-        name="todo"
-        formControlName="todo"
-        placeholder="What needs to be done?"
-        autofocus
-      />
-
-      <button class="float-right" type="submit">Add</button>
-    </fieldset>
-  </form>
+  <todo-todo-form (todoSubmitted)="todoSubmitted($event)" ></todo-todo-form>
 </div>

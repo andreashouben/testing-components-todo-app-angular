@@ -19,23 +19,13 @@ export class AppComponent implements OnInit {
     todo: new FormControl('', [Validators.required]),
   });
 
-  get todo() {
-    return this.todoForm.get('todo');
-  }
-
   constructor(
     private formBuilder: FormBuilder,
     private todoService: TodoService
   ) {}
 
-  onSubmit() {
-    this.todoForm.markAsDirty();
-    if (this.todoForm.valid) {
-      this.todoService
-        .createTodo(this.todoForm.value.todo)
-        .subscribe(() => this.getTodos());
-      this.todoForm.reset();
-    }
+  todoSubmitted(todo: string) {
+    this.todoService.createTodo(todo).subscribe(() => this.getTodos());
   }
 
   deleteTodo(todo: Todo) {
