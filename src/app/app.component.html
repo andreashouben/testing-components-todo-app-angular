@@ -3,15 +3,7 @@
   <p *ngIf="todos.length === 0">No Todos</p>
   <ul>
     <li *ngFor="let todo of todos">
-      {{ todo.text }}
-      <button
-        class="float-right button-icon"
-        title="remove"
-        (click)="deleteTodo(todo)"
-      >
-        <span hidden>remove</span>
-        <ng-icon size="20" name="typ-trash"></ng-icon>
-      </button>
+      <todo-todo-item [todo]="todo" (deleteTodoEvent)="deleteTodo(todo)"></todo-todo-item>
     </li>
   </ul>
 

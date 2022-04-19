@@ -1,0 +1,9 @@
+<span>{{ todo.text }}</span>
+<button
+  class="float-right button-icon"
+  title="remove"
+  (click)="onDeleteClick(todo)"
+>
+  <span hidden>remove</span>
+  <ng-icon size="20" name="typ-trash"></ng-icon>
+</button>
