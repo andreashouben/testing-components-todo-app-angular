@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 xmlns="http://www.w3.org/1999/html">Your Todos for today</h1>
+  <h1>Your Todos for today</h1>
   <p *ngIf="todos.length === 0">No Todos</p>
   <todo-todo-list [todos]="todos" (deleteTodoEvent)="deleteTodo($event)"></todo-todo-list>
 
