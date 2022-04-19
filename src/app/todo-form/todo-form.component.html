@@ -1,14 +1,16 @@
 <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
   <fieldset>
     <label for="add-todo"
-    >Add Todo
+      >Add Todo
       <span
         class="error"
         *ngIf="todoForm?.dirty && todo?.errors?.['required']"
-      >(Todo is required)</span
+        data-testid="todo-error-message"
+        >(Todo is required)</span
       ></label
     >
     <input
+      data-testid="todo-input"
       id="add-todo"
       type="text"
       name="todo"
@@ -17,6 +19,8 @@
       autofocus
     />
 
-    <button class="float-right" type="submit">Add</button>
+    <button data-testid="submit-button" class="float-right" type="submit">
+      Add
+    </button>
   </fieldset>
 </form>

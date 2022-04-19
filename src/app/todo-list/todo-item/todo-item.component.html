@@ -1,4 +1,5 @@
 <input
+  data-testid="check-todo"
   type="checkbox"
   (click)="markDone($event)"
   [attr.checked]="todo.done ? todo.done : null"
