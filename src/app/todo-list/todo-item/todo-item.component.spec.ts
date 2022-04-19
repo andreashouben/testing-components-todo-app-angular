@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TodoItemComponent } from './todo-item.component';
 import { NgIconsModule } from '@ng-icons/core';
 import { TypTrash } from '@ng-icons/typicons';
+import { By } from '@angular/platform-browser';
 
 describe('TodoItemComponent', () => {
   let component: TodoItemComponent;
@@ -24,5 +25,16 @@ describe('TodoItemComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('shows the assigned todo text', () => {
+    component.todo = { id: 1, done: false, text: 'buy milk' };
+    fixture.detectChanges();
+
+    const textEl = fixture.debugElement.query(
+      By.css('[data-testid="todo-text"]')
+    );
+
+    expect(textEl.nativeElement.textContent).toEqual('buy milk');
   });
 });

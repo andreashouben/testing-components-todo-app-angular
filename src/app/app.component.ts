@@ -32,6 +32,10 @@ export class AppComponent implements OnInit {
     this.todoService.deleteTodo(todo.id).subscribe(() => this.getTodos());
   }
 
+  markTodoAsDone(id: number) {
+    this.todoService.markTodoAsDone(id).subscribe(() => this.getTodos());
+  }
+
   getTodos() {
     this.todoService.getTodos().subscribe({
       next: (value) => (this.todos = value),

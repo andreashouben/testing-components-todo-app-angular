@@ -14,7 +14,7 @@ export class TodoService {
   }
 
   markTodoAsDone(id: number) {
-    this.httpClient.patch<Pick<Todo, 'done'>>(`${this._url}/${id}`, {
+    return this.httpClient.patch<Pick<Todo, 'done'>>(`${this._url}/${id}`, {
       done: true,
     });
   }

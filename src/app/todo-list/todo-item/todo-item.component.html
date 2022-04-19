@@ -1,4 +1,10 @@
-<span>{{ todo.text }}</span>
+<input
+  type="checkbox"
+  (click)="markDone($event)"
+  [attr.checked]="todo.done ? todo.done : null"
+/>
+<span data-testid="todo-text">{{ todo.text }}</span>
+
 <button
   class="float-right button-icon"
   title="remove"

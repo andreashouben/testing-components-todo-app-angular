@@ -10,7 +10,13 @@ export class TodoListComponent {
 
   @Output() deleteTodoEvent = new EventEmitter<Todo>();
 
+  @Output() markTodoAsDone = new EventEmitter<number>();
+
   onDeleteTodo(todo: Todo) {
     this.deleteTodoEvent.emit(todo);
+  }
+
+  onMarkedDone(id: number) {
+    this.markTodoAsDone.emit(id);
   }
 }

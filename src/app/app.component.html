@@ -1,7 +1,11 @@
 <div class="container">
   <h1>Your Todos for today</h1>
   <p *ngIf="todos.length === 0">No Todos</p>
-  <todo-todo-list [todos]="todos" (deleteTodoEvent)="deleteTodo($event)"></todo-todo-list>
+  <todo-todo-list
+    [todos]="todos"
+    (deleteTodoEvent)="deleteTodo($event)"
+    (markTodoAsDone)="markTodoAsDone($event)"
+  ></todo-todo-list>
 
-  <todo-todo-form (todoSubmitted)="todoSubmitted($event)" ></todo-todo-form>
+  <todo-todo-form (todoSubmitted)="todoSubmitted($event)"></todo-todo-form>
 </div>
