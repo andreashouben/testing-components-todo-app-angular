@@ -1,11 +1,7 @@
 <div class="container">
   <h1 xmlns="http://www.w3.org/1999/html">Your Todos for today</h1>
   <p *ngIf="todos.length === 0">No Todos</p>
-  <ul>
-    <li *ngFor="let todo of todos">
-      <todo-todo-item [todo]="todo" (deleteTodoEvent)="deleteTodo(todo)"></todo-todo-item>
-    </li>
-  </ul>
+  <todo-todo-list [todos]="todos" (deleteTodoEvent)="deleteTodo($event)"></todo-todo-list>
 
   <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
     <fieldset>

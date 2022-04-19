@@ -7,9 +7,10 @@ import { NgIconsModule } from '@ng-icons/core';
 import { TypTrash } from '@ng-icons/typicons';
 import { HttpClientModule } from '@angular/common/http';
 import { TodoItemComponent } from './todo-item/todo-item.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 @NgModule({
-  declarations: [AppComponent, TodoItemComponent],
+  declarations: [AppComponent, TodoItemComponent, TodoListComponent],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
